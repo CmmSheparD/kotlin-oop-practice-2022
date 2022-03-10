@@ -2,6 +2,7 @@ package address_parser
 
 data class Address(val index: Int, val city: String, val street: String, val building: Int) {
     override fun toString() = "$index, $city, $street, $building"
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -26,7 +27,8 @@ data class Address(val index: Int, val city: String, val street: String, val bui
 }
 
 fun parseAddresses(input: String): List<Address> {
-    val scan = "\\d+\\. (?<index>\\d{6}), (?<city>[^,\\n]+), ул\\. (?<street>[^,\\n]+), д\\. (?<building>\\d+)".toRegex()
+    val scan =
+        "\\d+\\. (?<index>\\d{6}), (?<city>[^,\\n]+), ул\\. (?<street>[^,\\n]+), д\\. (?<building>\\d+)".toRegex()
     val list = mutableListOf<Address>()
     for (i in scan.findAll(input)) {
         list.add(

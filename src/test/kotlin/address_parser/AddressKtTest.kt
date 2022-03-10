@@ -1,6 +1,7 @@
 package address_parser
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import kotlin.test.Test
 
 internal class AddressKtTest {
@@ -14,19 +15,19 @@ internal class AddressKtTest {
         assertEquals(expected, output[0])
     }
 
-   @Test
-   fun testParseMultipleValues() {
-       val example = """
-           1. 123456, СПб, ул. Невский проспект, д. 45
-           2. 743233, Москва, ул. Самая московская, д. 1
-           3. 228228, Екатеринбург, ул. Акашная, д. 47
-           4. 346723, New York, ул. Какие там улицы есть?, д. 32
-           5. 983200, Асмщиков, ул. Микрооптимизаций, д. 2
-           6. 123456, Санкт-Петербург, ул. Медиков, д. 1
-       """.trimIndent()
-       val expectedOutput = mutableListOf<Address>()
-       for (line in example.split("\n")) expectedOutput += parseAddresses(line)
-       val output = parseAddresses(example)
-       assertEquals(expectedOutput, output)
-   }
+    @Test
+    fun testParseMultipleValues() {
+        val example = """
+            1. 123456, СПб, ул. Невский проспект, д. 45
+            2. 743233, Москва, ул. Самая московская, д. 1
+            3. 228228, Екатеринбург, ул. Акашная, д. 47
+            4. 346723, New York, ул. Какие там улицы есть?, д. 32
+            5. 983200, Асмщиков, ул. Микрооптимизаций, д. 2
+            6. 123456, Санкт-Петербург, ул. Медиков, д. 1
+        """.trimIndent()
+        val expectedOutput = mutableListOf<Address>()
+        for (line in example.split("\n")) expectedOutput += parseAddresses(line)
+        val output = parseAddresses(example)
+        assertEquals(expectedOutput, output)
+    }
 }
