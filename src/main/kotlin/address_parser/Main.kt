@@ -15,29 +15,20 @@ fun main(args: Array<String>) {
         example = """
             1. 123456, СПб, ул. Невский проспект, д. 45
             2. 743233, Москва, ул. Самая московская, д. 1
-            3. 228228, Екатеринбург, ул. Акашная, д. 47
+            3. 228228, Екатеринбург, ул. Ака, д. 47
             4. 346723, New York, ул. Какие там улицы есть?, д. 32
             5. 983200, Асмщиков, ул. Микрооптимизаций, д. 2
         """.trimIndent()
     }
     val addresses = parseAddresses(example)
     for (a in addresses) println(a)
-    var minInd = addresses[0]
-    var maxInd = addresses[0]
-    var shortestStreet = addresses[0]
-    var longestStreet = addresses[0]
-    for (i in 1..addresses.lastIndex) {
-        val tmp = addresses[i]
-        if (tmp.index < minInd.index) {
-            minInd = tmp
-        } else if (tmp.index > maxInd.index) {
-            maxInd = tmp
-        }
-        if (tmp.street.length < shortestStreet.street.length) {
-            shortestStreet = tmp
-        } else if (tmp.street.length > longestStreet.street.length) {
-            longestStreet = tmp
-        }
+    val minInd = addresses.minWithOrNull { left: Address, right: Address -> left.index - right.index }
+    val maxInd = addresses.maxWithOrNull { left: Address, right: Address -> left.index - right.index }
+    val shortestStreet = addresses.minWithOrNull { left: Address, right: Address ->
+        left.street.length - right.street.length
+    }
+    val longestStreet = addresses.maxWithOrNull { left: Address, right: Address ->
+        left.street.length - right.street.length
     }
     println("Address with minimal index: $minInd")
     println("Address with maximal index: $maxInd")
