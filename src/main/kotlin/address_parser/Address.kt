@@ -27,18 +27,14 @@ data class Address(val index: Int, val city: String, val street: String, val bui
 }
 
 fun parseAddresses(input: String): List<Address> {
-    val scan =
+    val scanner =
         "\\d+\\. (?<index>\\d{6}), (?<city>[^,\\n]+), ул\\. (?<street>[^,\\n]+), д\\. (?<building>\\d+)".toRegex()
-    val list = mutableListOf<Address>()
-    for (i in scan.findAll(input)) {
-        list.add(
-            Address(
-                i.groups["index"]!!.value.toInt(),
-                i.groups["city"]!!.value,
-                i.groups["street"]!!.value,
-                i.groups["building"]!!.value.toInt(),
-            )
+    return scanner.findAll(input).map {
+        Address(
+            it.groups["index"]!!.value.toInt(),
+            it.groups["city"]!!.value,
+            it.groups["street"]!!.value,
+            it.groups["building"]!!.value.toInt(),
         )
-    }
-    return list
+    }.toList()
 }
