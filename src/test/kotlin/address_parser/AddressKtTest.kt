@@ -2,9 +2,30 @@ package address_parser
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.Test
 
 internal class AddressKtTest {
+    @Test
+    fun testEmptyStringParsingProducesNoError() {
+        assertDoesNotThrow { parseAddresses("") }
+    }
+
+    @Test
+    fun testEmptyStringParsingReturnsEmptyList() {
+        assertEquals(0, parseAddresses("").size)
+    }
+
+    @Test
+    fun testNoValuableStringParsingProducesNoError() {
+        assertDoesNotThrow { parseAddresses("definitely nothing interesting here") }
+    }
+
+    @Test
+    fun testNoValuableStringParsingReturnsEmptyList() {
+        assertEquals(0, parseAddresses("nothing interesting here too").size)
+    }
+
     @Test
     fun testParseSingleValue() {
         val input = "1. 123456, Санкт-Петербург, ул. Медиков, д. 1"
