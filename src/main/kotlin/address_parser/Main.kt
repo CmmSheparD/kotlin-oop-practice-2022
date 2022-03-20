@@ -22,14 +22,10 @@ fun main(args: Array<String>) {
     }
     val addresses = parseAddresses(example)
     for (a in addresses) println(a)
-    val minInd = addresses.minWithOrNull { left: Address, right: Address -> left.index - right.index }
-    val maxInd = addresses.maxWithOrNull { left: Address, right: Address -> left.index - right.index }
-    val shortestStreet = addresses.minWithOrNull { left: Address, right: Address ->
-        left.street.length - right.street.length
-    }
-    val longestStreet = addresses.maxWithOrNull { left: Address, right: Address ->
-        left.street.length - right.street.length
-    }
+    val minInd = addresses.minByOrNull { it.index }
+    val maxInd = addresses.maxByOrNull { it.index }
+    val shortestStreet = addresses.minByOrNull { it.street.length }
+    val longestStreet = addresses.maxByOrNull { it.street.length }
     println("Address with minimal index: $minInd")
     println("Address with maximal index: $maxInd")
     println("Address with shortest street name: $shortestStreet")
