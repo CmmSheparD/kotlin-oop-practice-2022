@@ -1,6 +1,7 @@
 package shapes
 
 interface Shape2d {
+    val shapeType: String
     fun calcArea(): Double
 }
 

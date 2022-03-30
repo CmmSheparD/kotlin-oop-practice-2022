@@ -1,10 +1,12 @@
 package shapes
 
+import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
-import kotlin.math.PI
 
 class Circle(val radius: Double, _fillColor: Color, _borderColor: Color) : ColoredShape2d {
+    override val shapeType = "Circle"
+
     override val fillColor = _fillColor
     override val borderColor = _borderColor
 
@@ -32,6 +34,8 @@ class Circle(val radius: Double, _fillColor: Color, _borderColor: Color) : Color
 }
 
 class Square(val sideLen: Double, _fillColor: Color, _borderColor: Color) : ColoredShape2d {
+    override val shapeType = "Square"
+
     override val fillColor = _fillColor
     override val borderColor = _borderColor
 
@@ -59,6 +63,8 @@ class Square(val sideLen: Double, _fillColor: Color, _borderColor: Color) : Colo
 }
 
 class Rectangle(val length: Double, val width: Double, _fillColor: Color, _borderColor: Color) : ColoredShape2d {
+    override val shapeType = "Rectangle"
+
     override val fillColor = _fillColor
     override val borderColor = _borderColor
 
@@ -94,6 +100,9 @@ class Triangle(
     _fillColor: Color,
     _borderColor: Color
 ) : ColoredShape2d {
+
+    override val shapeType = "Triangle"
+
     override val fillColor = _fillColor
     override val borderColor = _borderColor
 
