@@ -23,5 +23,5 @@ class ShapeCollector {
     fun groupByFillColor() = storage.groupBy { it.fillColor }
     fun groupByBorderColor() = storage.groupBy { it.borderColor }
 
-    fun findAllOfType(type: String) = storage.filter { it.shapeType == type }
+    inline fun <reified T> findAllOfType() = list.filterIsInstance<T>()
 }
