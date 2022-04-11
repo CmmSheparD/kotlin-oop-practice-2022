@@ -4,134 +4,60 @@ import kotlin.math.PI
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Circle(val radius: Double, _fillColor: Color, _borderColor: Color) : ColoredShape2d {
-    override val shapeType = "Circle"
-
-    override val fillColor = _fillColor
-    override val borderColor = _borderColor
+data class Circle(
+    val radius: Double,
+    override val fillColor: Color,
+    override val borderColor: Color
+) : ColoredShape2d {
+    init {
+        require(radius > 0.0)
+    }
 
     override fun calcArea() = PI * radius.pow(2)
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Circle
-
-        if (radius != other.radius) return false
-        if (fillColor != other.fillColor) return false
-        if (borderColor != other.borderColor) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = radius.hashCode()
-        result = 31 * result + fillColor.hashCode()
-        result = 31 * result + borderColor.hashCode()
-        return result
-    }
 }
 
-class Square(val sideLen: Double, _fillColor: Color, _borderColor: Color) : ColoredShape2d {
-    override val shapeType = "Square"
-
-    override val fillColor = _fillColor
-    override val borderColor = _borderColor
+data class Square(
+    val sideLen: Double,
+    override val fillColor: Color,
+    override val borderColor: Color
+) : ColoredShape2d {
+    init {
+        require(sideLen > 0.0)
+    }
 
     override fun calcArea() = sideLen.pow(2)
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Square
-
-        if (sideLen != other.sideLen) return false
-        if (fillColor != other.fillColor) return false
-        if (borderColor != other.borderColor) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = sideLen.hashCode()
-        result = 31 * result + fillColor.hashCode()
-        result = 31 * result + borderColor.hashCode()
-        return result
-    }
 }
 
-class Rectangle(val length: Double, val width: Double, _fillColor: Color, _borderColor: Color) : ColoredShape2d {
-    override val shapeType = "Rectangle"
-
-    override val fillColor = _fillColor
-    override val borderColor = _borderColor
+data class Rectangle(
+    val length: Double,
+    val width: Double,
+    override val fillColor: Color,
+    override val borderColor: Color
+) : ColoredShape2d {
+    init {
+        require(length > 0.0)
+        require(width > 0.0)
+    }
 
     override fun calcArea() = length * width
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Rectangle
-
-        if (length != other.length) return false
-        if (width != other.width) return false
-        if (fillColor != other.fillColor) return false
-        if (borderColor != other.borderColor) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = length.hashCode()
-        result = 31 * result + width.hashCode()
-        result = 31 * result + fillColor.hashCode()
-        result = 31 * result + borderColor.hashCode()
-        return result
-    }
 }
 
-class Triangle(
+data class Triangle(
     val sideA: Double,
     val sideB: Double,
     val sideC: Double,
-    _fillColor: Color,
-    _borderColor: Color
+    override val fillColor: Color,
+    override val borderColor: Color
 ) : ColoredShape2d {
-
-    override val shapeType = "Triangle"
-
-    override val fillColor = _fillColor
-    override val borderColor = _borderColor
+    init {
+        require(sideA > 0.0 && sideB > 0.0 && sideC > 0.0)
+        require(sideA < sideB + sideC)
+        require(sideB < sideA + sideC)
+        require(sideC < sideA + sideB)
+    }
 
     override fun calcArea(): Double {
         val halfP = (sideA + sideB + sideC) / 2.0
         return sqrt(halfP * (halfP - sideA) * (halfP - sideB) * (halfP - sideC))
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Triangle
-
-        if (sideA != other.sideA) return false
-        if (sideB != other.sideB) return false
-        if (sideC != other.sideC) return false
-        if (fillColor != other.fillColor) return false
-        if (borderColor != other.borderColor) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = sideA.hashCode()
-        result = 31 * result + sideB.hashCode()
-        result = 31 * result + sideC.hashCode()
-        result = 31 * result + fillColor.hashCode()
-        result = 31 * result + borderColor.hashCode()
-        return result
     }
 }
